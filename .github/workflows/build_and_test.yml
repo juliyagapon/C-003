@@ -8,9 +8,13 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read  # Allows reading repository contents
+  actions: write  # Enables creating annotations (optional)
+
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       # Checkout the repository
