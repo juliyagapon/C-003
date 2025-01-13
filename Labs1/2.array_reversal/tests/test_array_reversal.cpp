@@ -1,6 +1,6 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
-#include "array_reversal.h"  // Include your header
+#include "array_reversal.h"
 #include <vector>
 
 TEST_CASE("Array reversal") {
