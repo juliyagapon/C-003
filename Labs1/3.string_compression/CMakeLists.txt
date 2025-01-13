@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(PalindromeChecker)
+project(string_compression)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -18,5 +18,5 @@ add_executable(test_string_compression tests/test_string_compression.cpp)
 target_link_libraries(test_string_compression string_compression)
 
 # Add the array_reversal executable
-add_executable(string_compression_checker src/main.cpp)
-target_link_libraries(string_compression_checker string_compression)
+add_executable(string_compression_main src/main.cpp)
+target_link_libraries(string_compression_main string_compression)

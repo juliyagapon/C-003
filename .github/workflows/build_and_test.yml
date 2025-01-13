@@ -23,93 +23,124 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
 
-      # Run Clang-Tidy for string_compression and continue on error
-      - name: Run Clang-Tidy for string_compression
+      # Run Clang-Tidy for 4.find_second_largest_element and continue on error
+      - name: Run Clang-Tidy for 4.find_second_largest_element
         run: |
-          cd Labs1/string_compression
+          cd Labs1/4.find_second_largest_element
           clang-tidy src/*.cpp --checks='*' --fix || true
         continue-on-error: true
 
-      # Run Cppcheck for string_compression and continue on error
-      - name: Run Cppcheck for string_compression
+      # Run Cppcheck for 4.find_second_largest_element and continue on error
+      - name: Run Cppcheck for 4.find_second_largest_element
         run: |
-          cd Labs1/string_compression
+          cd Labs1/4.find_second_largest_element
           cppcheck --enable=all --inconclusive --force --quiet src || true
         continue-on-error: true
 
-      # Run Clang-Format for string_compression and continue on error
-      - name: Run Clang-Format for string_compression
+      # Run Clang-Format for 4.find_second_largest_element and continue on error
+      - name: Run Clang-Format for 4.find_second_largest_element
         run: |
-          cd Labs1/string_compression
+          cd Labs1/4.find_second_largest_element
           clang-format -i src/*.cpp src/*.h || true
         continue-on-error: true
 
-      # Build and test string_compression
-      - name: Build and test string_compression
+      # Build and test 4.find_second_largest_element
+      - name: Build and test 4.find_second_largest_element
         run: |
-          cd Labs1/string_compression
+          cd Labs1/4.find_second_largest_element
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_find_second_largest_element
+
+      # Run Clang-Tidy for 3.string_compression and continue on error
+      - name: Run Clang-Tidy for 3.string_compression
+        run: |
+          cd Labs1/3.string_compression
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 3.string_compression and continue on error
+      - name: Run Cppcheck for 3.string_compression
+        run: |
+          cd Labs1/3.string_compression
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 3.string_compression and continue on error
+      - name: Run Clang-Format for 3.string_compression
+        run: |
+          cd Labs1/3.string_compression
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 3.string_compression
+      - name: Build and test 3.string_compression
+        run: |
+          cd Labs1/3.string_compression
           mkdir -p build
           cd build
           cmake ..
           make
           ./test_string_compression
 
-      # Run Clang-Tidy for array_reversal and continue on error
-      - name: Run Clang-Tidy for array_reversal
+      # Run Clang-Tidy for 2.array_reversal and continue on error
+      - name: Run Clang-Tidy for 2.array_reversal
         run: |
-          cd Labs1/array_reversal
+          cd Labs1/2.array_reversal
           clang-tidy src/*.cpp --checks='*' --fix || true
         continue-on-error: true
 
-      # Run Cppcheck for array_reversal and continue on error
-      - name: Run Cppcheck for array_reversal
+      # Run Cppcheck for 2.array_reversal and continue on error
+      - name: Run Cppcheck for 2.array_reversal
         run: |
-          cd Labs1/array_reversal
+          cd Labs1/2.array_reversal
           cppcheck --enable=all --inconclusive --force --quiet src || true
         continue-on-error: true
 
-      # Run Clang-Format for array_reversal and continue on error
-      - name: Run Clang-Format for array_reversal
+      # Run Clang-Format for 2.array_reversal and continue on error
+      - name: Run Clang-Format for 2.array_reversal
         run: |
-          cd Labs1/array_reversal
+          cd Labs1/2.array_reversal
           clang-format -i src/*.cpp src/*.h || true
         continue-on-error: true
 
-      # Build and test array_reversal
-      - name: Build and test array_reversal
+      # Build and test 2.array_reversal
+      - name: Build and test 2.array_reversal
         run: |
-          cd Labs1/array_reversal
+          cd Labs1/2.array_reversal
           mkdir -p build
           cd build
           cmake ..
           make
           ./test_array_reversal
 
-      # Run Clang-Tidy for palindrome_checker and continue on error
-      - name: Run Clang-Tidy for palindrome_checker
+      # Run Clang-Tidy for 1.palindrome_checker and continue on error
+      - name: Run Clang-Tidy for 1.palindrome_checker
         run: |
-          cd Labs1/palindrome_checker
+          cd Labs1/1.palindrome_checker
           clang-tidy src/*.cpp --checks='*' --fix || true
         continue-on-error: true
 
-      # Run Cppcheck for palindrome_checker and continue on error
-      - name: Run Cppcheck for palindrome_checker
+      # Run Cppcheck for 1.palindrome_checker and continue on error
+      - name: Run Cppcheck for 1.palindrome_checker
         run: |
-          cd Labs1/palindrome_checker
+          cd Labs1/1.palindrome_checker
           cppcheck --enable=all --inconclusive --force --quiet src || true
         continue-on-error: true
 
-      # Run Clang-Format for palindrome_checker and continue on error
-      - name: Run Clang-Format for palindrome_checker
+      # Run Clang-Format for 1.palindrome_checker and continue on error
+      - name: Run Clang-Format for 1.palindrome_checker
         run: |
-          cd Labs1/palindrome_checker
+          cd Labs1/1.palindrome_checker
           clang-format -i src/*.cpp src/*.h || true
         continue-on-error: true
 
-      # Build and test palindrome_checker
-      - name: Build and test palindrome_checker
+      # Build and test 1.palindrome_checker
+      - name: Build and test 1.palindrome_checker
         run: |
-          cd Labs1/palindrome_checker
+          cd Labs1/1.palindrome_checker
           mkdir -p build
           cd build
           cmake ..

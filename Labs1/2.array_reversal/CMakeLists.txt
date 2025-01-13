@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(PalindromeChecker)
+project(2_array_reversal)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -18,5 +18,5 @@ add_executable(test_array_reversal tests/test_array_reversal.cpp)
 target_link_libraries(test_array_reversal array_reversal)
 
 # Add the array_reversal executable
-add_executable(array_reversal_checker src/main.cpp)
-target_link_libraries(array_reversal_checker array_reversal)
+add_executable(array_reversal_main src/main.cpp)
+target_link_libraries(array_reversal_main array_reversal)
