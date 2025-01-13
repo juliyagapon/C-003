@@ -1,0 +1,117 @@
+name: Build, Test and Check Code Quality
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install dependencies (cmake, g++, make, clang-tidy, cppcheck, clang-format)
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
+
+      # Run Clang-Tidy for string_compression and continue on error
+      - name: Run Clang-Tidy for string_compression
+        run: |
+          cd Labs1/string_compression
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for string_compression and continue on error
+      - name: Run Cppcheck for string_compression
+        run: |
+          cd Labs1/string_compression
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for string_compression and continue on error
+      - name: Run Clang-Format for string_compression
+        run: |
+          cd Labs1/string_compression
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test string_compression
+      - name: Build and test string_compression
+        run: |
+          cd Labs1/string_compression
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_string_compression
+
+      # Run Clang-Tidy for array_reversal and continue on error
+      - name: Run Clang-Tidy for array_reversal
+        run: |
+          cd Labs1/array_reversal
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for array_reversal and continue on error
+      - name: Run Cppcheck for array_reversal
+        run: |
+          cd Labs1/array_reversal
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for array_reversal and continue on error
+      - name: Run Clang-Format for array_reversal
+        run: |
+          cd Labs1/array_reversal
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test array_reversal
+      - name: Build and test array_reversal
+        run: |
+          cd Labs1/array_reversal
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_array_reversal
+
+      # Run Clang-Tidy for palindrome_checker and continue on error
+      - name: Run Clang-Tidy for palindrome_checker
+        run: |
+          cd Labs1/palindrome_checker
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for palindrome_checker and continue on error
+      - name: Run Cppcheck for palindrome_checker
+        run: |
+          cd Labs1/palindrome_checker
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for palindrome_checker and continue on error
+      - name: Run Clang-Format for palindrome_checker
+        run: |
+          cd Labs1/palindrome_checker
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test palindrome_checker
+      - name: Build and test palindrome_checker
+        run: |
+          cd Labs1/palindrome_checker
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_palindrome
