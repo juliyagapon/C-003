@@ -27,6 +27,41 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
 
+      ######
+
+      # Run Clang-Tidy for 5.longest_common_prefix and continue on error
+      - name: Run Clang-Tidy for 5.longest_common_prefix
+        run: |
+          cd Labs1/5.longest_common_prefix
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 5.longest_common_prefix and continue on error
+      - name: Run Cppcheck for 5.longest_common_prefix
+        run: |
+          cd Labs1/5.longest_common_prefix
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 5.longest_common_prefix and continue on error
+      - name: Run Clang-Format for 5.longest_common_prefix
+        run: |
+          cd Labs1/5.longest_common_prefix
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 5.longest_common_prefix
+      - name: Build and test 5.longest_common_prefix
+        run: |
+          cd Labs1/5.longest_common_prefix
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_longest_common_prefix
+
+      ######
+
       # Run Clang-Tidy for 4.find_second_largest_element and continue on error
       - name: Run Clang-Tidy for 4.find_second_largest_element
         run: |
@@ -57,6 +92,8 @@ jobs:
           cmake ..
           make
           ./test_find_second_largest_element
+
+      ######
 
       # Run Clang-Tidy for 3.string_compression and continue on error
       - name: Run Clang-Tidy for 3.string_compression
@@ -89,6 +126,8 @@ jobs:
           make
           ./test_string_compression
 
+      ######
+
       # Run Clang-Tidy for 2.array_reversal and continue on error
       - name: Run Clang-Tidy for 2.array_reversal
         run: |
@@ -119,6 +158,8 @@ jobs:
           cmake ..
           make
           ./test_array_reversal
+
+      ######
 
       # Run Clang-Tidy for 1.palindrome_checker and continue on error
       - name: Run Clang-Tidy for 1.palindrome_checker
