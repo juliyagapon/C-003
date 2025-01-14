@@ -29,6 +29,39 @@ jobs:
 
       ######
 
+      # Run Clang-Tidy for 6.rotate_array and continue on error
+      - name: Run Clang-Tidy for 6.rotate_array
+        run: |
+          cd Labs1/6.rotate_array
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 6.rotate_array and continue on error
+      - name: Run Cppcheck for 6.rotate_array
+        run: |
+          cd Labs1/6.rotate_array
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 6.rotate_array and continue on error
+      - name: Run Clang-Format for 6.rotate_array
+        run: |
+          cd Labs1/6.rotate_array
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 6.rotate_array
+      - name: Build and test 6.rotate_array
+        run: |
+          cd Labs1/6.rotate_array
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_rotate_array
+
+      ######
+
       # Run Clang-Tidy for 5.longest_common_prefix and continue on error
       - name: Run Clang-Tidy for 5.longest_common_prefix
         run: |
