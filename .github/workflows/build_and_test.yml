@@ -27,6 +27,41 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
     
+    ###### 9.string_permutations
+    # Run Clang-Tidy for 9.string_permutations and continue on error
+      - name: Run Clang-Tidy for 9.string_permutations
+        run: |
+          cd Labs1/9.string_permutations
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 9.string_permutations and continue on error
+      - name: Run Cppcheck for 9.string_permutations
+        run: |
+          cd Labs1/9.string_permutations
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 9.string_permutationsand continue on error
+      - name: Run Clang-Format for 9.string_permutations
+        run: |
+          cd Labs1/9.string_permutations
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 9.string_permutations
+      - name: Build and test 9.string_permutations
+        run: |
+          cd Labs1/9.string_permutations
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_string_permutations
+    
+    ######
+
+    
     ###### 8.subarray_with_maximum_sum
     # Run Clang-Tidy for 8.subarray_with_maximum_sum and continue on error
       - name: Run Clang-Tidy for 8.subarray_with_maximum_sum
