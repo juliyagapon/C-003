@@ -27,6 +27,40 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
     
+    ###### 10.removeDuplicatesFromSortedArray
+    # Run Clang-Tidy for 10.removeDuplicatesFromSortedArray and continue on error
+      - name: Run Clang-Tidy for 10.removeDuplicatesFromSortedArray
+        run: |
+          cd Labs1/10.removeDuplicatesFromSortedArray
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 10.removeDuplicatesFromSortedArray and continue on error
+      - name: Run Cppcheck for 10.removeDuplicatesFromSortedArray
+        run: |
+          cd Labs1/10.removeDuplicatesFromSortedArray
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 10.removeDuplicatesFromSortedArray continue on error
+      - name: Run Clang-Format for 10.removeDuplicatesFromSortedArray
+        run: |
+          cd Labs1/10.removeDuplicatesFromSortedArray
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 10.removeDuplicatesFromSortedArray
+      - name: Build and test 10.removeDuplicatesFromSortedArray
+        run: |
+          cd Labs1/10.removeDuplicatesFromSortedArray
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_remove_duplicates
+    
+    ######
+
     ###### 9.string_permutations
     # Run Clang-Tidy for 9.string_permutations and continue on error
       - name: Run Clang-Tidy for 9.string_permutations
