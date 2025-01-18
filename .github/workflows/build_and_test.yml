@@ -27,6 +27,41 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
 
+    ######
+
+      # Run Clang-Tidy for 7.rotate_array and continue on error
+      - name: Run Clang-Tidy for 7.anagram_checker
+        run: |
+          cd Labs1/7.anagram_checker
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 7.anagram_checker and continue on error
+      - name: Run Cppcheck for 7.anagram_checker
+        run: |
+          cd Labs1/7.anagram_checker
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 7.anagram_checker and continue on error
+      - name: Run Clang-Format for 7.anagram_checker
+        run: |
+          cd Labs1/7.anagram_checker
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 7.anagram_checker
+      - name: Build and test 7.anagram_checker
+        run: |
+          cd Labs1/7.anagram_checker
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_anagram_checker
+
+      ######
+
       ######
 
       # Run Clang-Tidy for 6.rotate_array and continue on error
