@@ -26,7 +26,39 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
+    
+    ###### 8.subarray_with_maximum_sum
+    # Run Clang-Tidy for 8.subarray_with_maximum_sum and continue on error
+      - name: Run Clang-Tidy for 8.subarray_with_maximum_sum
+        run: |
+          cd Labs1/8.subarray_with_maximum_sum
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
 
+      # Run Cppcheck for 8.subarray_with_maximum_sum and continue on error
+      - name: Run Cppcheck for 8.subarray_with_maximum_sum
+        run: |
+          cd Labs1/8.subarray_with_maximum_sum
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 8.subarray_with_maximum_sum and continue on error
+      - name: Run Clang-Format for 8.subarray_with_maximum_sum
+        run: |
+          cd Labs1/8.subarray_with_maximum_sum
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 8.subarray_with_maximum_sum
+      - name: Build and test 8.subarray_with_maximum_sum
+        run: |
+          cd Labs1/8.subarray_with_maximum_sum
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_subarray_with_maximum_sum
+    
     ######
 
       # Run Clang-Tidy for 7.rotate_array and continue on error
