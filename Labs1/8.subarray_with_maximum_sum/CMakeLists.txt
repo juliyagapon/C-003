@@ -17,6 +17,6 @@ add_executable(test_subarray_with_maximum_sum tests/test_subarray_with_maximum_s
 # Link the library to the test executable
 target_link_libraries(test_subarray_with_maximum_sum subarray_with_maximum_sum)
 
-# Add the find_second_largest_element_main executable
+# Add the subarray_with_maximum_sum executable
 add_executable(subarray_with_maximum_sum_main src/main.cpp)
 target_link_libraries(subarray_with_maximum_sum_main subarray_with_maximum_sum)

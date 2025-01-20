@@ -17,6 +17,6 @@ add_executable(test_longest_common_prefix tests/test_longest_common_prefix.cpp)
 # Link the library to the test executable
 target_link_libraries(test_longest_common_prefix longest_common_prefix)
 
-# Add the find_second_largest_element_main executable
+# Add the longest_common_prefix executable
 add_executable(longest_common_prefix_main src/main.cpp)
 target_link_libraries(longest_common_prefix_main longest_common_prefix)

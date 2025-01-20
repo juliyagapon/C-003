@@ -17,6 +17,6 @@ add_executable(test_find_second_largest_element tests/test_find_second_largest_e
 # Link the library to the test executable
 target_link_libraries(test_find_second_largest_element find_second_largest_element)
 
-# Add the find_second_largest_element_main executable
+# Add the find_second_largest_element executable
 add_executable(find_second_largest_element_main src/main.cpp)
 target_link_libraries(find_second_largest_element_main find_second_largest_element)
