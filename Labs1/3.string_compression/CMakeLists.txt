@@ -17,6 +17,6 @@ add_executable(test_string_compression tests/test_string_compression.cpp)
 # Link the library to the test executable
 target_link_libraries(test_string_compression string_compression)
 
-# Add the array_reversal executable
+# Add the string_compression executable
 add_executable(string_compression_main src/main.cpp)
 target_link_libraries(string_compression_main string_compression)

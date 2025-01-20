@@ -15,6 +15,6 @@ add_library(palindrome src/palindrome.cpp)
 add_executable(test_palindrome tests/test_palindrome.cpp)
 target_link_libraries(test_palindrome palindrome)
 
-# Add the palindrome executable
+# Add the palindrome_checker executable
 add_executable(palindrome_checker src/main.cpp)
 target_link_libraries(palindrome_checker palindrome)

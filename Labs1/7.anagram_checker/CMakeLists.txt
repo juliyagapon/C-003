@@ -17,6 +17,6 @@ add_executable(test_anagram_checker tests/test_anagram_checker.cpp)
 # Link the library to the test executable
 target_link_libraries(test_anagram_checker anagram_checker)
 
-# Add the find_second_largest_element_main executable
+# Add the anagram_checker executable
 add_executable(anagram_checker_main src/main.cpp)
 target_link_libraries(anagram_checker_main anagram_checker)
