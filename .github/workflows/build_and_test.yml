@@ -1,0 +1,96 @@
+name: Build, Test and Check Code Quality
+
+on:
+  push:
+    branches:
+      - LAB2
+  pull_request:
+    branches:
+      - LAB2
+
+permissions:
+  contents: read  # Allows reading repository contents
+  actions: write  # Enables creating annotations (optional)
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install dependencies (cmake, g++, make, clang-tidy, cppcheck, clang-format)
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
+
+    ###### 2.MergeSort
+    # Run Clang-Tidy for 2.MergeSort and continue on error
+      - name: Run Clang-Tidy for 2.MergeSort
+        run: |
+          cd Labs2/2.MergeSort
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 2.MergeSort and continue on error
+      - name: Run Cppcheck for 2.MergeSort
+        run: |
+          cd Labs2/2.MergeSort
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 2.MergeSort on error
+      - name: Run Clang-Format for 12.MergeSort
+        run: |
+          cd Labs2/2.MergeSort
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 2.MergeSort
+      - name: Build and test 2.MergeSort
+        run: |
+          cd Labs2/2.MergeSort
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_mergeSort
+    
+    ######
+    
+    ###### 1.MatrixMultiplication
+    # Run Clang-Tidy for 1.MatrixMultiplication and continue on error
+      - name: Run Clang-Tidy for 1.MatrixMultiplication
+        run: |
+          cd Labs2/1.MatrixMultiplication
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 1.MatrixMultiplication and continue on error
+      - name: Run Cppcheck for 1.MatrixMultiplication
+        run: |
+          cd Labs2/1.MatrixMultiplication
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 1.MatrixMultiplicationcontinue on error
+      - name: Run Clang-Format for 1.MatrixMultiplication
+        run: |
+          cd Labs2/1.MatrixMultiplication
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 1.MatrixMultiplication
+      - name: Build and test 1.MatrixMultiplication
+        run: |
+          cd Labs2/1.MatrixMultiplication
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_matrixMultiplication
+    
+    ######
