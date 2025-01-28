@@ -27,6 +27,40 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
 
+    ###### 3.FunctionPointer
+    # Run Clang-Tidy for 3.FunctionPointer and continue on error
+      - name: Run Clang-Tidy for 3.FunctionPointer
+        run: |
+          cd Labs2/3.FunctionPointer
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 3.FunctionPointer and continue on error
+      - name: Run Cppcheck for 3.FunctionPointer
+        run: |
+          cd Labs2/3.FunctionPointer
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 3.FunctionPointer on error
+      - name: Run Clang-Format for 3.FunctionPointer
+        run: |
+          cd Labs2/3.FunctionPointer
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 3.FunctionPointer
+      - name: Build and test 3.FunctionPointer
+        run: |
+          cd Labs2/3.FunctionPointer
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_functionPointer
+
+    ######
+
     ###### 2.MergeSort
     # Run Clang-Tidy for 2.MergeSort and continue on error
       - name: Run Clang-Tidy for 2.MergeSort
@@ -43,7 +77,7 @@ jobs:
         continue-on-error: true
 
       # Run Clang-Format for 2.MergeSort on error
-      - name: Run Clang-Format for 12.MergeSort
+      - name: Run Clang-Format for 2.MergeSort
         run: |
           cd Labs2/2.MergeSort
           clang-format -i src/*.cpp src/*.h || true
