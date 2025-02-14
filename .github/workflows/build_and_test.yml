@@ -1,0 +1,62 @@
+name: Build, Test and Check Code Quality
+
+on:
+  push:
+    branches:
+      - LAB3
+  pull_request:
+    branches:
+      - LAB3
+
+permissions:
+  contents: read  # Allows reading repository contents
+  actions: write  # Enables creating annotations (optional)
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Install dependencies (cmake, g++, make, clang-tidy, cppcheck, clang-format)
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ make clang-tidy cppcheck clang-format
+
+    ###### 1.MatrixClass
+    # Run Clang-Tidy for 1.MatrixClass and continue on error
+      - name: Run Clang-Tidy for 1.MatrixClass
+        run: |
+          cd Labs3/1.MatrixClass
+          clang-tidy src/*.cpp --checks='*' --fix || true
+        continue-on-error: true
+
+      # Run Cppcheck for 1.MatrixClass and continue on error
+      - name: Run Cppcheck for 1.MatrixClass
+        run: |
+          cd Labs3/1.MatrixClass
+          cppcheck --enable=all --inconclusive --force --quiet src || true
+        continue-on-error: true
+
+      # Run Clang-Format for 1.MatrixClass on error
+      - name: Run Clang-Format for 1.MatrixClass
+        run: |
+          cd Labs3/1.MatrixClass
+          clang-format -i src/*.cpp src/*.h || true
+        continue-on-error: true
+
+      # Build and test 1.MatrixClass
+      - name: Build and test 1.MatrixClass
+        run: |
+          cd Labs3/1.MatrixClass
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+          ./test_matrixClass
+
+    ######
